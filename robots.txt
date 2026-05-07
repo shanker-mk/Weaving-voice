@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://weaving-voice.netlify.app/sitemap.xml
