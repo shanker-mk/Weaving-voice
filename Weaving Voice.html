@@ -620,6 +620,44 @@
     .contact-cards{grid-template-columns:1fr}
   }
 
+  /* ---------- contact form ---------- */
+  .contact-form-wrap{
+    max-width:720px;margin:48px auto 0;
+    background:rgba(246,239,225,.04);
+    border:1px solid rgba(216,176,106,.25);
+    border-radius:18px;padding:36px;
+  }
+  .cf-eyebrow{color:var(--gold-soft);font-size:11px;letter-spacing:.32em;text-transform:uppercase;margin-bottom:8px}
+  .cf-title{font-family:'Cormorant Garamond',serif;font-weight:500;color:var(--cream);font-size:26px;margin:0 0 24px;line-height:1.2}
+  .cf-form{display:flex;flex-direction:column;gap:16px}
+  .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .cf-field{display:flex;flex-direction:column;gap:6px}
+  .cf-field label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft)}
+  .cf-field input, .cf-field select, .cf-field textarea{
+    background:transparent;border:1px solid rgba(216,176,106,.25);color:var(--cream);
+    padding:12px 14px;border-radius:8px;font-family:inherit;font-size:14.5px;
+    transition:border-color .2s ease;outline:none;
+  }
+  .cf-field textarea{min-height:110px;resize:vertical;font-family:inherit}
+  .cf-field input:focus, .cf-field select:focus, .cf-field textarea:focus{border-color:var(--gold-soft)}
+  .cf-field select option{background:var(--ink);color:var(--cream)}
+  .cf-field.bad input, .cf-field.bad select, .cf-field.bad textarea{border-color:#e88a6a}
+  .cf-err{display:none;color:#e88a6a;font-size:11.5px;margin-top:2px}
+  .cf-field.bad .cf-err{display:block}
+  .cf-submit{
+    background:var(--saffron);color:var(--cream);border:none;padding:15px 24px;border-radius:999px;
+    font-family:inherit;font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all .25s ease;
+    margin-top:8px;align-self:flex-start;
+  }
+  .cf-submit:hover{background:var(--saffron-deep)}
+  .cf-submit:disabled{opacity:.6;cursor:wait}
+  .cf-hp{position:absolute;left:-9999px;opacity:0}
+  .cf-success{display:none;text-align:center;padding:24px 16px;border:1px dashed var(--gold-soft);border-radius:12px;color:var(--gold-soft)}
+  .cf-success.on{display:block}
+  .cf-success .check{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold-soft);display:grid;place-items:center;margin:0 auto 12px}
+  @media (max-width: 720px){.cf-row{grid-template-columns:1fr} .contact-form-wrap{padding:28px 22px}}
+
   /* ---------- footer ---------- */
   footer{
     background:var(--maroon-deep);color:var(--cream);
@@ -964,6 +1002,65 @@
         <div class="ccard-val ccard-link">@weavingvoice</div>
       </a>
     </div>
+
+    <div class="contact-form-wrap reveal">
+      <div class="cf-eyebrow">Send an enquiry</div>
+      <h3 class="cf-title">Tell us a little, and we will be in touch.</h3>
+
+      <form class="cf-form" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="enquiryForm">
+        <input type="hidden" name="form-name" value="enquiry" />
+        <p class="cf-hp"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+        <div class="cf-row">
+          <div class="cf-field">
+            <label for="ef-name">Name</label>
+            <input id="ef-name" name="name" type="text" placeholder="Your name" required />
+            <div class="cf-err">Please share your name.</div>
+          </div>
+          <div class="cf-field">
+            <label for="ef-email">Email</label>
+            <input id="ef-email" name="email" type="email" placeholder="you@email.com" />
+            <div class="cf-err">Please enter a valid email.</div>
+          </div>
+        </div>
+
+        <div class="cf-row">
+          <div class="cf-field">
+            <label for="ef-phone">Phone</label>
+            <input id="ef-phone" name="phone" type="tel" placeholder="+91 …" required />
+            <div class="cf-err">Please share a phone number.</div>
+          </div>
+          <div class="cf-field">
+            <label for="ef-interest">Interest</label>
+            <select id="ef-interest" name="interest" required>
+              <option value="">Select a program…</option>
+              <option>Carnatic Classical</option>
+              <option>Sugama Sangeetha</option>
+              <option>Musical Instruments</option>
+              <option>General enquiry</option>
+            </select>
+            <div class="cf-err">Please choose a program.</div>
+          </div>
+        </div>
+
+        <div class="cf-field">
+          <label for="ef-msg">Message</label>
+          <textarea id="ef-msg" name="message" placeholder="A few words about your music background, the learner’s age, schedule preferences — anything that helps us reach back." required></textarea>
+          <div class="cf-err">A short message helps us reply better.</div>
+        </div>
+
+        <button class="cf-submit" type="submit" id="efSubmit">
+          <span class="ef-label">Send enquiry</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+
+      <div class="cf-success" id="efSuccess">
+        <div class="check"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);margin-bottom:6px">Namaste, and thank you.</div>
+        <div style="font-size:13px">Your enquiry has reached us. We will write back within a couple of working days.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1013,6 +1110,41 @@ const io = new IntersectionObserver((entries)=>{
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 /* testimonials removed */
+
+(function(){
+  const form = document.getElementById('enquiryForm');
+  if(!form) return;
+  const success = document.getElementById('efSuccess');
+  const submitBtn = document.getElementById('efSubmit');
+  const label = submitBtn.querySelector('.ef-label');
+  const encode = (d) => Object.keys(d).map(k => encodeURIComponent(k)+'='+encodeURIComponent(d[k])).join('&');
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const checks = [
+      {id:'ef-name', test: v => v.trim().length > 0},
+      {id:'ef-phone', test: v => v.trim().length > 0},
+      {id:'ef-email', test: v => v.trim() === '' || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim())},
+      {id:'ef-interest', test: v => v.trim().length > 0},
+      {id:'ef-msg', test: v => v.trim().length > 0},
+    ];
+    let ok = true;
+    for(const c of checks){
+      const el = document.getElementById(c.id);
+      const field = el.closest('.cf-field');
+      if(!c.test(el.value)){ field.classList.add('bad'); ok = false; } else field.classList.remove('bad');
+    }
+    if(!ok) return;
+    submitBtn.disabled = true; label.textContent = 'Sending…';
+    const fd = new FormData(form); const data = {};
+    fd.forEach((v,k)=>{ data[k]=v; });
+    fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:encode(data)})
+      .then(()=>{ form.style.display='none'; success.classList.add('on'); })
+      .catch(()=>{ submitBtn.disabled=false; label.textContent='Try again'; });
+  });
+  form.querySelectorAll('input, select, textarea').forEach(inp => {
+    inp.addEventListener('input', ()=>{ const f=inp.closest('.cf-field'); if(f) f.classList.remove('bad'); });
+  });
+})();
 
 
 </script>
