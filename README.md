@@ -2,6 +2,10 @@
 
 Static single-page site for Weaving Voice — Cultural & Music Education Trust.
 
+Vibe coded using claude
+
+Deployed at https://weaving-voice.netlify.app/
+
 ## Files
 - `index.html` — the site
 - `assets/` — images
